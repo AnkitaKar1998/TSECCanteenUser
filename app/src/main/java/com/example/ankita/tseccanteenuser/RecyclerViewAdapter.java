@@ -17,6 +17,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private Context context;
     private List<Product> products;
 
+
     public RecyclerViewAdapter(Context context, List<Product> products) {
         this.context = context;
         this.products = products;
@@ -30,6 +31,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
+
+
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {

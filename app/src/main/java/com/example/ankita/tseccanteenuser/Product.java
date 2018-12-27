@@ -4,6 +4,7 @@ public class Product {
     private int image;
     private String p_name,p_desc,price,status,real_price,real_status;
 
+
     public Product(int image, String p_name, String p_desc, String price, String status, String real_price, String real_status) {
         this.image = image;
         this.p_name = p_name;
