@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.ordercardview){
-            Intent i = new Intent(MainActivity.this,OrdersActivity.class);
+            Intent i = new Intent(MainActivity.this,MyOrders.class);
             startActivity(i);
         }
         else {
