@@ -37,7 +37,7 @@ public class MyOrdersRecyclerViewAdapter extends RecyclerView.Adapter<MyOrdersRe
     public void onBindViewHolder(@NonNull MyOrdersViewHolder myOrdersViewHolder, int i) {
         RetrieveOrdersModel momc = plist.get(i);
         myOrdersViewHolder.order_no.setText("Order No: " + momc.getOrder_id());
-//        addViews(myOrdersViewHolder,momc);
+        addViews(myOrdersViewHolder,momc);
         myOrdersViewHolder.status.setText(momc.getStatus());
         myOrdersViewHolder.tot_price.setText(momc.getPrice());
 
@@ -61,31 +61,31 @@ public class MyOrdersRecyclerViewAdapter extends RecyclerView.Adapter<MyOrdersRe
         }
     }
 
-//    public void addViews(MyOrdersViewHolder vh, RetrieveOrdersModel obj)
-//    {
-//        //int n = obj.getNo_of_items();
-//        List<RetrieveFoodsModel> mfmc = obj.getFoods();
-//
-//        for (RetrieveFoodsModel m : mfmc)
-//        {
-//            o_list = new LinearLayout(c);
-//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-//            o_list.setLayoutParams(params);
-//            o_list.setOrientation(LinearLayout.HORIZONTAL);
-//            TextView tv1 = new TextView(c);
-//            TextView tv2 = new TextView(c);
-//            TextView tv3 = new TextView(c);
-//            tv1.setLayoutParams(new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.WRAP_CONTENT,1f));
-//            tv2.setLayoutParams(new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.WRAP_CONTENT,1f));
-//            tv3.setLayoutParams(new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.WRAP_CONTENT,1f));
-//            tv1.setText(m.getName());
-//            tv2.setText(m.getQuantity());
-//            tv3.setText(m.getPrice());
-//            o_list.addView(tv1);
-//            o_list.addView(tv2);
-//            o_list.addView(tv3);
-//            vh.ld.addView(o_list);
-//        }
-//
-//    }
+    public void addViews(MyOrdersViewHolder vh, RetrieveOrdersModel obj)
+    {
+        //int n = obj.getNo_of_items();
+        List<RetrieveFoodsModel> mfmc = obj.getFoods();
+
+        for (RetrieveFoodsModel m : mfmc)
+        {
+            o_list = new LinearLayout(c);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+            o_list.setLayoutParams(params);
+            o_list.setOrientation(LinearLayout.HORIZONTAL);
+            TextView tv1 = new TextView(c);
+            TextView tv2 = new TextView(c);
+            TextView tv3 = new TextView(c);
+            tv1.setLayoutParams(new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.WRAP_CONTENT,1f));
+            tv2.setLayoutParams(new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.WRAP_CONTENT,1f));
+            tv3.setLayoutParams(new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.WRAP_CONTENT,1f));
+            tv1.setText(m.getName());
+            tv2.setText(m.getQuantity());
+            tv3.setText(m.getPrice());
+            o_list.addView(tv1);
+            o_list.addView(tv2);
+            o_list.addView(tv3);
+            vh.ld.addView(o_list);
+        }
+
+    }
 }
