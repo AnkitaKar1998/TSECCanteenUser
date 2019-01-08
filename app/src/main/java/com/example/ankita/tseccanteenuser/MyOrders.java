@@ -102,17 +102,70 @@ public class MyOrders extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseDatabase.getInstance().getReference().child("R_Orders").addValueEventListener(new ValueEventListener() {
+        Log.d("urmi", "onStart()");
+        FirebaseDatabase.getInstance().getReference().child("OrdersAnkita").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int i=0;
+                Log.d("urmi", "onDataChange()");
+//                int i=0;
                 for (DataSnapshot data: dataSnapshot.getChildren()){
-                    retrieveOrdersModels.add(data.getValue(RetrieveOrdersModel.class));
-                    foods.add(data.getValue(RetrieveOrdersModel.class).getFoods().get(i));
-                    Log.d("ShowD","foods size:"+foods.size());
-                    Log.d("ShowD","list Size :"+retrieveOrdersModels.size());
-                    Log.d("ShowData","data: "+retrieveOrdersModels.get(i).getFoods());
-                    i++;
+                    Log.d("urmi", "ankita before");
+                    MyOrdersModelClass myOrdersModelClass = data.getValue(MyOrdersModelClass.class);
+                    Log.d("urmi", "ankita after");
+
+                    Log.d("urmi", "START");
+                    Log.d("urmi", "amount: "+myOrdersModelClass.getAmount());
+                    Log.d("urmi", "order: "+myOrdersModelClass.getOrderNo());
+                    Log.d("urmi", "sname: "+myOrdersModelClass.getStudentName());
+                    Log.d("urmi", "sid: "+myOrdersModelClass.getStudentId());
+                    for(int i=0; i<myOrdersModelClass.getFoods().size(); i++) {
+                        Log.d("urmi", "START 111111");
+                        Log.d("urmi", "name: " + myOrdersModelClass.getFoods().get(i).getName());
+                        Log.d("urmi", "quantity: " + myOrdersModelClass.getFoods().get(i).getQuantity());
+                        Log.d("urmi", "price: " + myOrdersModelClass.getFoods().get(i).getPrice());
+                        Log.d("urmi", "END 11111111");
+                    }
+                    Log.d("urmi", "END");
+
+
+
+//                    String Price = data.child("Price").getValue(String.class);
+//                    String C_id = data.child("C_id").getValue(String.class);
+//                    String Order_id = data.child("Order_id").getValue(String.class);
+//                    String Name = data.child("Name").getValue(String.class);
+//                    String Status = data.child("Status").getValue(String.class);
+//
+//                    Log.d("urmi", "START");
+//                    Log.d("urmi", "Price: "+Price);
+//                    Log.d("urmi", "C_id: "+C_id);
+//                    Log.d("urmi", "Order_id: "+Order_id);
+//                    Log.d("urmi", "Name: "+Name);
+//                    Log.d("urmi", "Status: "+Status);
+
+
+//                    int totalNodes = (int) data.child("Foods").getChildrenCount();
+//                    for(int j=0; j<totalNodes; j++) {
+//                        RetrieveFoodsModel retrieveFoodsModel = data.child("Foods").child("F"+(j+1)).getValue(RetrieveFoodsModel.class);
+//
+//                        Log.d("urmi", "START 111111");
+//                        Log.d("urmi", "name: " + retrieveFoodsModel.getName());
+//                        Log.d("urmi", "quantity: " + retrieveFoodsModel.getQuantity());
+//                        Log.d("urmi", "price: " + retrieveFoodsModel.getPrice());
+//                        Log.d("urmi", "END 11111111");
+//
+//                    }
+//
+//                    Log.d("urmi", "END");
+
+
+
+
+//                    retrieveOrdersModels.add(data.getValue(RetrieveOrdersModel.class));
+//                    foods.add(data.getValue(RetrieveOrdersModel.class).getFoods().get(i));
+//                    Log.d("ShowD","foods size:"+foods.size());
+//                    Log.d("ShowD","list Size :"+retrieveOrdersModels.size());
+//                    Log.d("ShowData","data: "+retrieveOrdersModels.get(i).getFoods());
+//                    i++;
                 }
             }
 
