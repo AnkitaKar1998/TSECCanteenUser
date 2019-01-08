@@ -1,33 +1,58 @@
 package com.example.ankita.tseccanteenuser;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class RetrieveOrdersModel {
-    private String C_id, Name, Order_id, Price, Status;
-    private ArrayList<RetrieveFoodsModel> Foods;
+    private String c_id, name, order_id, price, status;
+    private ArrayList<RetrieveFoodsModel> foods;
 
     public String getC_id() {
-        return C_id;
+        return c_id;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public String getOrder_id() {
-        return Order_id;
+        return order_id;
     }
 
     public String getPrice() {
-        return Price;
+        return price;
     }
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
     public ArrayList<RetrieveFoodsModel> getFoods() {
-        return Foods;
+        return foods;
+    }
+
+
+
+    public void setC_id(String c_id) {
+        this.c_id = c_id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setOrder_id(String order_id) {
+        this.order_id = order_id;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setFoods(ArrayList<RetrieveFoodsModel> foods) {
+        this.foods = foods;
     }
 }

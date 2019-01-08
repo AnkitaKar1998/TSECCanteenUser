@@ -25,11 +25,8 @@ public class MyOrdersRecyclerViewAdapter extends RecyclerView.Adapter<MyOrdersRe
     @NonNull
     @Override
     public MyOrdersViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-
-//       View view= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.myorderscustomized,viewGroup,false);
         LayoutInflater l = LayoutInflater.from(viewGroup.getContext());
         View v = l.inflate(R.layout.myorderscustomized,viewGroup,false);
-//        MyOrdersViewHolder view = new MyOrdersViewHolder(v);
         return new MyOrdersViewHolder(v);
     }
 
@@ -63,7 +60,6 @@ public class MyOrdersRecyclerViewAdapter extends RecyclerView.Adapter<MyOrdersRe
 
     public void addViews(MyOrdersViewHolder vh, RetrieveOrdersModel obj)
     {
-        //int n = obj.getNo_of_items();
         List<RetrieveFoodsModel> mfmc = obj.getFoods();
 
         for (RetrieveFoodsModel m : mfmc)

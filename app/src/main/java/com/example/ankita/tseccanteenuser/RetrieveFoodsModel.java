@@ -1,31 +1,31 @@
 package com.example.ankita.tseccanteenuser;
 
 public class RetrieveFoodsModel {
-    private String Name,Price,Quantity;
+    private String name, price, quantity;
 
     public String getName() {
-        return Name;
+        return name;
     }
 
 
     public String getPrice() {
-        return Price;
+        return price;
     }
 
 
     public String getQuantity() {
-        return Quantity;
+        return quantity;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public void setPrice(String price) {
-        Price = price;
+        this.price = price;
     }
 
     public void setQuantity(String quantity) {
-        Quantity = quantity;
+        this.quantity = quantity;
     }
 }

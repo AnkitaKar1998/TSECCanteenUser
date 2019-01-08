@@ -59,12 +59,8 @@ public class MenuActivity extends AppCompatActivity {
         dbr.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                Log.d("ShowData", "ankita before");
                 currentUserName = dataSnapshot.child("Users").child(uid).child("name").getValue(String.class);
                 Log.d("ShowData", "Name: "+currentUserName);
-//                Map<String,String> map = dataSnapshot.getValue(Map.class);
-//                  currentUserName = map.get("name");
-//                  Log.d("ShowData","Name: "+currentUserName);
             }
 
             @Override
@@ -74,8 +70,6 @@ public class MenuActivity extends AppCompatActivity {
         });
 
 
-
-       // mRootRef = new Firebase("https://tseccanteen-f57af.firebaseio.com/Test");
         clicky=new MenuViewAdapter.clickListener(){
             @Override
             public void sendData(SendProducts p) {
@@ -119,39 +113,30 @@ public class MenuActivity extends AppCompatActivity {
                 DatabaseReference root = FirebaseDatabase.getInstance().getReference("R_Orders");
                 Random random = new Random();
                 int r = random.nextInt(65);
-                final String rand = mDatabase.push().getKey();
-                        //Integer.toString(random.nextInt(1245785));
+                int rand = random.nextInt(125478963);
+                String rand1 = Integer.toString(rand);
                 final String oid = "O"+Integer.toString(r);
-                root.child(rand).child("C_id").setValue(uid);
-                root.child(rand).child("Order_id").setValue(oid);
-                Log.d("ShowData", "order: "+oid);
+                RetrieveOrdersModel retrieveOrdersModel = new RetrieveOrdersModel();
+                retrieveOrdersModel.setName(currentUserName);
+                retrieveOrdersModel.setC_id(uid);
+                retrieveOrdersModel.setOrder_id(oid);
+                retrieveOrdersModel.setStatus("Pending");
+                ArrayList<RetrieveFoodsModel> retrieveFoodsModels = new ArrayList<>();
 
                 for (SendProducts x : products){
                     String fid;
                     i++;
-                    //Log.d("ShowData","Object "+i+":\n" + "Name: " + x.getN() + "\nQuantity:" +x.getQ()+"\nPrice:"+ x.getP() +"\n");
                     t_price = t_price + Integer.parseInt(x.getP());
                     fid="F"+Integer.toString(i);
                     RetrieveFoodsModel obj=new RetrieveFoodsModel();
                     obj.setName(x.getN());
                     obj.setPrice(x.getP());
                     obj.setQuantity(x.getQ());
-                    Log.d("msg","in for");
-//                    root.child(rand).child("Foods").child(fid).setValue(obj);
-                    mDatabase.child("R_Orders").child(rand).child("Foods").child(mDatabase.push().getKey()).setValue(obj);
-//                    root.child(rand).child("Foods").child(fid).child("Name").setValue(x.getN());
-//                    root.child(rand).child("Foods").child(fid).child("Quantity").setValue(x.getQ());
-//                    root.child(rand).child("Foods").child(fid).child("Price").setValue(x.getP());
-                    //root.child(oid).child("Foods").child(x.getN()).child("Quantity").setValue(x.getQ());
+                    retrieveFoodsModels.add(obj);
                 }
-                root.child(rand).child("Price").setValue(Integer.toString(t_price));
-                root.child(rand).child("Status").setValue("Pending");
-                root.child(rand).child("Name").setValue(currentUserName);
-
-
-//                        root.child("testy").child("Name").setValue("Abc");
-//                        root.child("testy").child("test").setValue("Y");
-
+                retrieveOrdersModel.setFoods(retrieveFoodsModels);
+                retrieveOrdersModel.setPrice(Integer.toString(t_price));
+                root.child(rand1).setValue(retrieveOrdersModel);
 
             }
 
