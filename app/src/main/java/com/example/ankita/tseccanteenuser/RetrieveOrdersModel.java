@@ -3,7 +3,7 @@ package com.example.ankita.tseccanteenuser;
 import java.util.ArrayList;
 
 public class RetrieveOrdersModel {
-    private String c_id, name, order_id, price, status;
+    private String c_id, name, order_id, price, status,otp;
     private ArrayList<RetrieveFoodsModel> foods;
 
     public String getC_id() {
@@ -30,7 +30,9 @@ public class RetrieveOrdersModel {
         return foods;
     }
 
-
+    public String getOtp() {
+        return otp;
+    }
 
     public void setC_id(String c_id) {
         this.c_id = c_id;
@@ -54,5 +56,9 @@ public class RetrieveOrdersModel {
 
     public void setFoods(ArrayList<RetrieveFoodsModel> foods) {
         this.foods = foods;
+    }
+
+    public void setOtp(String otp) {
+        this.otp = otp;
     }
 }

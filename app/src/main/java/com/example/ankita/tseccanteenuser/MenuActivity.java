@@ -31,28 +31,54 @@ public class MenuActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     MenuViewAdapter adapter;
-    List<MenuProducts> menuprods;
-    List<SendProducts> products;
+    ArrayList<MenuProducts> menuprods;
+    ArrayList<SendProducts> products;
     MenuViewAdapter.clickListener clicky;
     Firebase mRootRef;
     String currentUserName;
     String uid;
     DatabaseReference dbr;
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference foodref;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        menuprods = new ArrayList<>();
+//        menuprods = new ArrayList<>();
         products = new ArrayList<>();
-        recyclerView = findViewById(R.id.menu_items_recycler_view);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        menuprods.add(new MenuProducts(R.drawable.thali,"Thali","Delicious", "50", "0"));
-        menuprods.add(new MenuProducts(R.drawable.pavbhaji,"Pav Bhaji","Delicious", "70", "0"));
-        menuprods.add(new MenuProducts(R.drawable.vadapav,"Vada Pav","Delicious", "20", "0"));
+
+//        menuprods.add(new MenuProducts(R.drawable.thali,"Thali","Delicious", "50", "0"));
+//        menuprods.add(new MenuProducts(R.drawable.pavbhaji,"Pav Bhaji","Delicious", "70", "0"));
+//        menuprods.add(new MenuProducts(R.drawable.vadapav,"Vada Pav","Delicious", "20", "0"));
+
+        foodref = FirebaseDatabase.getInstance().getReference("FoodsAnkita");
+        foodref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                menuprods = new ArrayList<>();
+                MenuProducts menuProducts;
+                for (DataSnapshot ds : dataSnapshot.getChildren())
+                {
+                    menuProducts = ds.getValue(MenuProducts.class);
+                    Log.d("ShowData","Name: " + menuProducts.getName());
+                    menuprods.add(menuProducts);
+
+                }
+                recyclerView = findViewById(R.id.menu_items_recycler_view);
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setLayoutManager(new LinearLayoutManager(MenuActivity.this));
+                adapter = new MenuViewAdapter(MenuActivity.this,menuprods,clicky);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         dbr = FirebaseDatabase.getInstance().getReference();
@@ -114,13 +140,18 @@ public class MenuActivity extends AppCompatActivity {
                 Random random = new Random();
                 int r = random.nextInt(65);
                 int rand = random.nextInt(125478963);
+                int min = 1000;
+                int max = 9999;
+                int otp = random.nextInt((max-min)+1)+min;
                 String rand1 = Integer.toString(rand);
                 final String oid = "O"+Integer.toString(r);
+
                 RetrieveOrdersModel retrieveOrdersModel = new RetrieveOrdersModel();
                 retrieveOrdersModel.setName(currentUserName);
                 retrieveOrdersModel.setC_id(uid);
                 retrieveOrdersModel.setOrder_id(oid);
                 retrieveOrdersModel.setStatus("Pending");
+                retrieveOrdersModel.setOtp(Integer.toString(otp));
                 ArrayList<RetrieveFoodsModel> retrieveFoodsModels = new ArrayList<>();
 
                 for (SendProducts x : products){
@@ -143,8 +174,7 @@ public class MenuActivity extends AppCompatActivity {
         });
 
 
-        adapter = new MenuViewAdapter(this,menuprods,clicky);
-        recyclerView.setAdapter(adapter);
+
     }
 
 

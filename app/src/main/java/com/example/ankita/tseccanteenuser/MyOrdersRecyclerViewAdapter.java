@@ -32,11 +32,12 @@ public class MyOrdersRecyclerViewAdapter extends RecyclerView.Adapter<MyOrdersRe
 
     @Override
     public void onBindViewHolder(@NonNull MyOrdersViewHolder myOrdersViewHolder, int i) {
+        String rupee = c.getResources().getString(R.string.Rs);
         RetrieveOrdersModel momc = plist.get(i);
         myOrdersViewHolder.order_no.setText("Order No: " + momc.getOrder_id());
         addViews(myOrdersViewHolder,momc);
         myOrdersViewHolder.status.setText(momc.getStatus());
-        myOrdersViewHolder.tot_price.setText(momc.getPrice());
+        myOrdersViewHolder.tot_price.setText(rupee+" "+ momc.getPrice());
 
     }
 
@@ -61,6 +62,7 @@ public class MyOrdersRecyclerViewAdapter extends RecyclerView.Adapter<MyOrdersRe
     public void addViews(MyOrdersViewHolder vh, RetrieveOrdersModel obj)
     {
         List<RetrieveFoodsModel> mfmc = obj.getFoods();
+        String rupee = c.getResources().getString(R.string.Rs);
 
         for (RetrieveFoodsModel m : mfmc)
         {
@@ -76,7 +78,7 @@ public class MyOrdersRecyclerViewAdapter extends RecyclerView.Adapter<MyOrdersRe
             tv3.setLayoutParams(new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.WRAP_CONTENT,1f));
             tv1.setText(m.getName());
             tv2.setText(m.getQuantity());
-            tv3.setText(m.getPrice());
+            tv3.setText(rupee + " " + m.getPrice());
             o_list.addView(tv1);
             o_list.addView(tv2);
             o_list.addView(tv3);

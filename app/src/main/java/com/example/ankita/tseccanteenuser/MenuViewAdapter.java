@@ -1,5 +1,6 @@
 package com.example.ankita.tseccanteenuser;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,18 +13,23 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class MenuViewAdapter extends RecyclerView.Adapter<MenuViewAdapter.MenuViewHolder> {
     private Context ctx;
-    private List<MenuProducts> menulist;
+    private ArrayList<MenuProducts> menulist;
     public clickListener click;
-    private List<SendProducts> products;
+    private ArrayList<SendProducts> products;
 
-    public MenuViewAdapter(Context ctx, List<MenuProducts> menulist ,clickListener click) {
+    public MenuViewAdapter(Context ctx, ArrayList<MenuProducts> menulist ,clickListener click) {
         this.ctx = ctx;
         this.menulist = menulist;
-        this.click=(clickListener)click;
+        this.click=click;
     }
 
     interface clickListener{
@@ -45,11 +51,15 @@ public class MenuViewAdapter extends RecyclerView.Adapter<MenuViewAdapter.MenuVi
 
 
         final MenuProducts mp = menulist.get(i);
-        menuViewHolder.title.setText(mp.getP_name());
-        menuViewHolder.description.setText(mp.getProd_desc());
+        menuViewHolder.title.setText(mp.getName());
+        menuViewHolder.description.setText(mp.getDescription());
         menuViewHolder.price.setText(mp.getPrice());
-        menuViewHolder.quantity.setText(mp.getQuantity());
-        menuViewHolder.menu_image.setImageDrawable(ctx.getResources().getDrawable(mp.getImg()));
+        menuViewHolder.quantity.setText("0");
+//        StorageReference storageReference = FirebaseStorage.getInstance().getReference(mp.getImage());
+        Glide.with(ctx)
+                .load(mp.getImage())
+                .into(menuViewHolder.menu_image);
+//        menuViewHolder.menu_image.setImageDrawable(ctx.getResources().getDrawable(mp.getImg()));
 
         menuViewHolder.plus_butt.setOnClickListener(new View.OnClickListener() {
             @Override

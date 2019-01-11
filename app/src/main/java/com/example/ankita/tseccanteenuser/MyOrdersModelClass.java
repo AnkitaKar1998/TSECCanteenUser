@@ -5,8 +5,16 @@ import java.util.List;
 
 public class MyOrdersModelClass {
 
-    String amount, studentName, studentId, orderNo;
+    String amount, studentName, studentId, orderNo, otp;
     ArrayList<MyFoodModelClass> foods;
+
+    public String getOtp() {
+        return otp;
+    }
+
+    public void setOtp(String otp) {
+        this.otp = otp;
+    }
 
     public String getAmount() {
         return amount;
