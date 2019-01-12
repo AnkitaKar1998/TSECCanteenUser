@@ -14,10 +14,18 @@
         android:paddingBottom="10dp"
         app:cardElevation="4dp">
         <LinearLayout
+            android:id="@+id/holder_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#f2f2f2"
             android:orientation="vertical">
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/tick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_check_circle_black_24dp"
+                android:visibility="gone"/>
             <TextView
                 android:id="@+id/Order_Number"
                 android:layout_width="match_parent"
@@ -138,6 +146,38 @@
                     style="@style/TextAppearance.AppCompat.Title"
                     android:ellipsize="end"
                     android:text="Delivered"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#235874"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/otp_linear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:ellipsize="end"
+                    android:text="OTP"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#235874"/>
+                <TextView
+                    android:id="@+id/otp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:ellipsize="end"
+                    android:text="abc"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="#235874"/>

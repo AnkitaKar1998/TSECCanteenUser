@@ -1,12 +1,14 @@
 package com.example.ankita.tseccanteenuser;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -36,6 +38,16 @@ public class MyOrdersRecyclerViewAdapter extends RecyclerView.Adapter<MyOrdersRe
         RetrieveOrdersModel momc = plist.get(i);
         myOrdersViewHolder.order_no.setText("Order No: " + momc.getOrder_id());
         addViews(myOrdersViewHolder,momc);
+        if(momc.getStatus().equals("Pending"))
+        {
+            myOrdersViewHolder.otp.setText(momc.getOtp());
+        }
+        else
+        {
+            myOrdersViewHolder.tick.setVisibility(View.VISIBLE);
+            myOrdersViewHolder.otplinearlayout.setVisibility(View.GONE);
+            myOrdersViewHolder.ld.setBackgroundColor(Color.parseColor("#98FB98"));
+        }
         myOrdersViewHolder.status.setText(momc.getStatus());
         myOrdersViewHolder.tot_price.setText(rupee+" "+ momc.getPrice());
 
@@ -47,15 +59,20 @@ public class MyOrdersRecyclerViewAdapter extends RecyclerView.Adapter<MyOrdersRe
     }
 
     public class MyOrdersViewHolder extends RecyclerView.ViewHolder{
-        TextView order_no,tot_price,status;
-        LinearLayout ld;
+        TextView order_no,tot_price,status,otp;
+        LinearLayout ld,otplinearlayout,ld1;
+        ImageView tick;
         public MyOrdersViewHolder(@NonNull View itemView) {
             super(itemView);
             ld = itemView.findViewById(R.id.items_linear_layout_L1);
             order_no=itemView.findViewById(R.id.Order_Number);
             tot_price=itemView.findViewById(R.id.total_price);
             status = itemView.findViewById(R.id.now_status);
-
+            tick = itemView.findViewById(R.id.tick);
+            otp = itemView.findViewById(R.id.otp);
+            ld = itemView.findViewById(R.id.holder_linear_layout);
+            ld1 = itemView.findViewById(R.id.items_linear_layout_L1);
+            otplinearlayout = itemView.findViewById(R.id.otp_linear_layout);
         }
     }
 
@@ -82,7 +99,7 @@ public class MyOrdersRecyclerViewAdapter extends RecyclerView.Adapter<MyOrdersRe
             o_list.addView(tv1);
             o_list.addView(tv2);
             o_list.addView(tv3);
-            vh.ld.addView(o_list);
+            vh.ld1.addView(o_list);
         }
 
     }

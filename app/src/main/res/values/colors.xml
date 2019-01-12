@@ -5,4 +5,5 @@
     <color name="colorAccent">#D81B60</color>
     <color name="backlight">#986754</color>
     <color name="button_pressed">#f0f0f0</color>
+    <color name="light_green">#98FB98</color>
 </resources>
